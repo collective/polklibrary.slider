@@ -252,7 +252,7 @@ var PolkSlider = function(id) {
         load_resources : function() {
             // Load Files
             if (typeof $.fn.sortable === 'undefined') {
-                $('head').append($('<script>').attr({'name': 'text/javascript', 'src': '/++resource++polklibraryslider/jquery-ui-1.9.2.custom.min.js'}));
+                $('head').append($('<script>').attr({'name': 'text/javascript', 'src': '++resource++polklibraryslider/jquery-ui-1.9.2.custom.min.js'}));
             }
             
             // Load Images
