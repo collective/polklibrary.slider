@@ -6,7 +6,6 @@ var PolkSlider = function(id) {
     
     var obj = {
 
-        root_url : document.location.protocal + '//' + document.location.host + '/' + document.location.pathname,
         _first_starting: true,
         _portlet : null,
         _container : null,
@@ -52,6 +51,19 @@ var PolkSlider = function(id) {
             
             this.build_links();
             this.build_editor();
+        },
+        
+        root_url : function() {
+            var url = $('body').attr('data-portal-url');
+            
+            if (url == '' || url == null) {
+                proto = 'http://';
+                if(document.location.protocal == 'https:')
+                    proto = 'https://';
+                url = proto + document.location.host + document.location.pathname;
+            }
+            return url;
+            
         },
         
         build_links : function() {
@@ -252,7 +264,7 @@ var PolkSlider = function(id) {
         load_resources : function() {
             // Load Files
             if (typeof $.fn.sortable === 'undefined') {
-                $('head').append($('<script>').attr({'name': 'text/javascript', 'src': '++resource++polklibraryslider/jquery-ui-1.9.2.custom.min.js'}));
+                $('head').append($('<script>').attr({'name': 'text/javascript', 'src': this.root_url() + '/++resource++polklibraryslider/jquery-ui-1.9.2.custom.min.js'}));
             }
             
             // Load Images
@@ -262,6 +274,9 @@ var PolkSlider = function(id) {
             }).each(function() {
               if(this.complete) $(this).load();
             });
+            
+            // Add 
+            this._container.find('.pl-loading').css('background-url', 'url(' + this.root_url() + '/++resource++polklibraryslider/loading.gif)');
         },
         
         set_transition : function(i) {

@@ -18,7 +18,6 @@
 }
 #visual-portal-wrapper div.pl-slider-container.pl-loading  {
     background-color: #666666;
-    background-image: url('++resource++polklibraryslider/loading.gif');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 5%;
