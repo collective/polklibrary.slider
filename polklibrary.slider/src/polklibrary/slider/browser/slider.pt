@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone"
+	  lang="en">
+<body>
+
+	<metal:block fill-slot="javascript_head_slot">
+
+	</metal:block>
+	<metal:block fill-slot="style_slot">
+	</metal:block>
+
+	<metal:content-core fill-slot="content-core">
+
+        <form id="form" method="post" enctype="multipart/form-data" tal:attributes="action string:${view/raw_absolute_url}/edit_slider">
+            <input type="hidden" tal:attributes="value view/id" name="id" />
+            <input type="hidden" tal:attributes="value view/portlet_manager" name="manager" />
+            <input type="hidden" tal:attributes="value view/portlet_name" name="name"/>
+            <input type="hidden" tal:attributes="value view/portlet_key" name="key"/>
+        
+            <br />
+            
+            <div class="pl-slide-fileUpload">
+                <input type="file" multiple name="files" />
+                <div>Drop images here to upload...</div>
+            </div>
+            
+            <br />
+        
+            <label>Drag to rearrange order:</label>
+            <tal:block define="images view/get_organized_images; global index python:0">
+                <ul class="pl-slide-sortable">
+                    <li class="ui-state-default" tal:repeat="image images/restricted" data-active="0">
+                        <label tal:attributes="for string:${image/UID}">Show?</label>
+                        <input type="checkbox" tal:attributes="name string:form.active.${index}; id string:${image/UID}; value image/getPath;" checked="true" />
+                        <img tal:attributes="src string:${image/getURL}/@@images/image" />
+                        <input type="hidden" tal:attributes="name string:form.index.${index}; value index" />
+                        <span class="pl-slide-load" title="Edit Image" tal:attributes="data-src string:${image/getURL}/edit?referer=${context/absolute_url}">Edit</span>
+                        <span class="pl-slide-load delete" title="Delete Image Confirmation?" tal:attributes="data-src string:${image/getURL}/delete_confirmation?referer=${context/absolute_url}">Delete</span>
+                        <tal:block define="global index python: index+1" />
+                    </li>
+                </ul>
+                
+                <span class="pl-slide-static-open">Show list of all available images?</span>
+                <ul class="pl-slide-static">
+                    <li tal:repeat="image images/others" data-active="0">
+                        <label tal:attributes="for string:${image/UID}">Show?</label>
+                        <input type="checkbox" tal:attributes="name string:form.active.${index}; id string:${image/UID}; value image/getPath;" />
+                        <img tal:attributes="src string:${image/getURL}/@@images/image" />
+                        <input type="hidden" tal:attributes="name string:form.index.${index}; value index" />
+                        <span class="pl-slide-load" title="Edit Image" tal:attributes="data-src string:${image/getURL}/edit?referer=${context/absolute_url}">Edit</span>
+                        <span class="pl-slide-load delete" title="Delete Image Confirmation?" tal:attributes="data-src string:${image/getURL}/delete_confirmation?referer=${context/absolute_url}">Delete</span>
+                        <tal:block define="global index python: index+1" />
+                    </li>
+                </ul>
+            </tal:block>
+            
+            <br />
+            
+            <div class="formControls">
+                <input id="form-buttons-apply" class="submit-widget button-field" type="submit" value="Save" name="form.buttons.apply" />
+                <input id="form-buttons-cancel_add" class="submit-widget button-field" type="submit" value="Cancel" name="form.buttons.cancel_add" />
+            </div>
+            
+        </form>
+    
+	</metal:content-core>
+
+</body>
+</html>

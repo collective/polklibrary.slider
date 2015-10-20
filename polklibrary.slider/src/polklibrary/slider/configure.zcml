@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="polklibrary.slider">
+
+  <includeDependencies package="." />
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package=".browser" />
+  <include package=".portlets" />
+
+
+  <genericsetup:registerProfile
+      name="default"
+      title="polklibrary.slider"
+      directory="profiles/default"
+      description="Installs the polklibrary.slider add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <genericsetup:importStep
+      name="polklibrary.slider-postInstall"
+      title="polklibrary.slider post_install import step"
+      description="Post install import step from polklibrary.slider"
+      handler=".setuphandlers.post_install">
+  </genericsetup:importStep>
+
+</configure>

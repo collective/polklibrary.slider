@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag="">
+
+<section class="portlet portletSlider" data-loaded="0" role="section" i18n:domain="plone">
+
+    <section class="portletContent">
+
+        <div tal:attributes="class string:${view/get_cssclass_no_images} pl-slider-container pl-loading;
+            data-speed view/_data/transition_time;
+            data-transitions view/_data/show_transitions;
+            data-randomstart view/_data/random_start;
+            data-showtitle view/_data/show_title;
+            data-showdescription view/_data/show_description;
+            data-showdots view/_data/show_dots;
+            data-showarrows view/_data/show_arrows;
+        ">
+            <div class="pl-slide-left">&#9664;</div>
+            <div class="pl-slide-right">&#9654;</div>
+            <div class="dots"></div>
+            <div tal:condition="view/slider_editor_permission" class="pl-slide-edit">
+                <span class="pl-slide-load" title="Edit Settings" tal:attributes="data-src string:${view/portal/absolute_url}/++contextportlets++${view/portlet_manager}/${view/portlet_name}/edit">Settings</span>
+                <span class="pl-slide-load" title="Edit Images" tal:attributes="data-src string:${context/absolute_url}/edit_slider?id=${view/_data/folder_id}&manager=${view/portlet_manager}&name=${view/portlet_name}&key=${view/portlet_key}">Edit</span>
+            </div>
+            <div class="pl-slide-text">
+                <div class="pl-slide-title"></div>
+                <div class="pl-slide-description"></div>
+            </div>
+            
+            <img class="pl-slide-image" tal:repeat="image view/get_images"  tal:attributes="src string:${image/getURL}/@@images/image; title image/Description; alt image/Title; data-href image/getRemoteUrl" />
+            
+            <div tal:condition="view/slider_editor_permission" class="pl-slide-load-zone">
+                <div class="pl-slide-label"></div>
+                <div class="pl-slide-content"></div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            PolkSliderLoad();
+        </script>
+        
+    </section>
+
+</section>
+</html>
