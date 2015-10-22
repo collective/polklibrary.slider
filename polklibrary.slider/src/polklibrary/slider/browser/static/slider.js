@@ -225,9 +225,9 @@ var PolkSlider = function(id) {
             
             // Handle Transition In's
             if (this._transition == 'fade') {
-                $(img).css('position','relative').fadeIn(500);
+                $(img).css('position','relative').fadeIn(500).css("display","block");;
                 if (this._show_title || this._show_description)
-                    this._container.find('.pl-slide-text').fadeIn(500);
+                    this._container.find('.pl-slide-text').fadeIn(500).css("display","block");;
             }
             else if (this._transition == 'nothing') {
                 $(img).show();
@@ -237,10 +237,10 @@ var PolkSlider = function(id) {
                     'display':'block',
                     'position':'relative',
                     'opacity':'0',
-                    'left':'-1000px',
+                    'left':'-200px',
                 }).stop(true,true).animate({
                     opacity: 1,
-                    left: '+=1000px'
+                    left: '+=200px'
                 }, 500);
                 if (this._show_title || this._show_description)
                     this._container.find('.pl-slide-text').fadeIn(500);

@@ -105,9 +105,8 @@ div.pl-slide-right {
 
 /* dots */
 div.dots {
-    bottom: 0;
+    bottom: 5px;
     left: 0;
-    line-height: 1.0em;
     position: absolute;
     right: 0;
     text-align: center;
