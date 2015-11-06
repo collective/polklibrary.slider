@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+      name="polklibrary.slider"
+      interface="polklibrary.slider.interfaces.IPolklibrarySliderLayer"
+      />
+</layers>
