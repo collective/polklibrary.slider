@@ -83,19 +83,19 @@ var PolkSlider = function(id) {
                 $('.pl-slide-load-zone .pl-slide-content').empty();
                 $('.pl-slide-load-zone').hide();
                 var option = this;
-                self._container.find('.pl-slide-load-zone .pl-slide-content').load( $(option).attr('data-src') + ' #form' , function(){
+                self._container.find('.pl-slide-load-zone .pl-slide-content').load( $(option).attr('data-src') + ' #form,#zc.page.browser_form' , function(){
                 
                     self._container.find('.pl-slide-load-zone .pl-slide-label').html($(option).attr('title'));
                     self._container.find('.pl-slide-load-zone').slideDown();
                     
                     // Setup referer
-                    if(self._container.find('.pl-slide-load-zone #form input[name="referer"]').val() == '') 
-                        self._container.find('.pl-slide-load-zone #form input[name="referer"]').remove();
+                    if(self._container.find('.pl-slide-load-zone form input[name="referer"]').val() == '') 
+                        self._container.find('.pl-slide-load-zone form input[name="referer"]').remove();
                     var referer = $('<input>').attr({'name':'referer','type':'hidden'}).val(document.location.href);
-                    self._container.find('.pl-slide-load-zone #form').append(referer);
+                    self._container.find('.pl-slide-load-zone form').append(referer);
                     
                     // Handle the Save
-                    self._container.find('#pl-slide-load-zone #form').submit(function(e){
+                    self._container.find('#pl-slide-load-zone form').submit(function(e){
                         e.preventDefault(); //prevent submit
                         var referer = $(this).find('input[name="referer"]').val();
                         var data = $(this).serializeArray();
