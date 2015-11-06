@@ -24,12 +24,5 @@
       name="polklibraryslider"
       directory="static"
       />
-      
-<!--
-  <plone:static
-    directory="static"
-    type="plone"
-    name="polklibraryslider"
-    />-->
-    
+
 </configure>
