@@ -83,7 +83,7 @@ var PolkSlider = function(id) {
                 $('.pl-slide-load-zone .pl-slide-content').empty();
                 $('.pl-slide-load-zone').hide();
                 var option = this;
-                self._container.find('.pl-slide-load-zone .pl-slide-content').load( $(option).attr('data-src') + ' #form,#zc.page.browser_form' , function(){
+                self._container.find('.pl-slide-load-zone .pl-slide-content').load( $(option).attr('data-src') + ' #content-core form' , function(){
                 
                     self._container.find('.pl-slide-load-zone .pl-slide-label').html($(option).attr('title'));
                     self._container.find('.pl-slide-load-zone').slideDown();
