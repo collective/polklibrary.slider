@@ -11,6 +11,7 @@ from polklibrary.slider.browser.utility import get_restricted_images
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope import schema
+from zope.formlib import form
 from zope.interface import implements
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.security import checkPermission
@@ -141,6 +142,7 @@ class Renderer(base.Renderer):
 class AddForm(base.AddForm):
     """ Portlet add form. """
     schema = ISlider
+    form_fields = form.Fields(ISlider) #backwards to plone 4
     label = u'Add Slider'
     description = u'Add Slider Desc'
 
@@ -161,6 +163,7 @@ class AddForm(base.AddForm):
 class EditForm(base.EditForm):
     """ Portlet edit form. """
     schema = ISlider
+    form_fields = form.Fields(ISlider) #backwards to plone 4
     label = u'Edit Slider'
     description = u'Edit Slider Desc'
     
