@@ -34,7 +34,6 @@ var PolkSlider = function(id) {
             this._show_arrows = Boolean(parseInt(this._container.attr('data-showarrows')));
             this.set_transition(parseInt(this._container.attr('data-transitions')));
             this._INDEX_MAX = this._container.find('img').length;
-
             
             if (this._random_start)
                 this._index = Math.floor((Math.random() * this._INDEX_MAX)); 
@@ -46,8 +45,9 @@ var PolkSlider = function(id) {
                     this.build_arrows();
                 this.rotate_process();
             }
-            else
+            else {
                 this.show_image();
+            }
             
             this.build_links();
             this.build_editor();
@@ -204,10 +204,11 @@ var PolkSlider = function(id) {
         },
         
         show_image : function() {
+            var self = this;
             var img = this._container.find('img.pl-slide-image').get(this._index);
             this._dots.find('span').removeClass('active');
             $(this._dots.find('span').get(this._index)).addClass('active');
-            
+             
             // Handle Transition Out's
             this._container.find('img.pl-slide-image').css('position','absolute').stop(true,true).fadeOut(1000);
             this._container.find('.pl-slide-text').hide();
@@ -230,7 +231,7 @@ var PolkSlider = function(id) {
                     this._container.find('.pl-slide-text').fadeIn(500).css("display","block");;
             }
             else if (this._transition == 'nothing') {
-                $(img).show();
+                $(img).css({'position':'relative','display':'block'}).show();
             }
             else if (this._transition == 'slide') {
                 $(img).css({
@@ -245,6 +246,16 @@ var PolkSlider = function(id) {
                 if (this._show_title || this._show_description)
                     this._container.find('.pl-slide-text').fadeIn(500);
             }
+            
+            // Set Height Off Container When Image Loads
+            // $(img).on('load', function(){
+                // console.log('loaded: ' + $(img).height() );
+                // $(self._container).css('height', $(img).height());
+            // }).on('error', function() { 
+                // console.log('error: ' + $(img).height() );
+                // $(self._container).css('height', '150px');
+            // });
+                   
         },
         
         rotate_process : function() {

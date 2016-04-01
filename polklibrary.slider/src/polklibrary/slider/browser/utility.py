@@ -1,7 +1,16 @@
 from operator import itemgetter
 from plone import api  
-     
+from zope.component import getMultiAdapter
 
+
+def get_restricted_path(context, request):
+    context_state = getMultiAdapter((context, request), name=u'plone_context_state')
+    canonical_object = context_state.canonical_object()
+    canonical_url_path = canonical_object.absolute_url_path()
+    print canonical_url_path
+    return canonical_url_path
+
+        
 def unparse_images(images):
     try:
         data_string = ''

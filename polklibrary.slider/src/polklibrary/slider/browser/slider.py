@@ -1,7 +1,7 @@
 
 from plone import api
 from plone.namedfile.file import NamedBlobImage
-from polklibrary.slider.browser.utility import parse_images, unparse_images, get_restricted_images
+from polklibrary.slider.browser.utility import parse_images, unparse_images, get_restricted_images, get_restricted_path
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -33,10 +33,10 @@ class Slider(BrowserView):
         
         if self.context.getDefaultPage():
             self.default_page = self.context.getDefaultPage()
-        
-        
         self.raw_absolute_url = self.context.absolute_url().replace('/' + self.default_page, '')
-        context_path = self.context.absolute_url_path().replace('/' + self.default_page, '')
+        
+        #context_path = self.context.absolute_url_path().replace('/' + self.default_page, '')
+        
         
         if 'form.buttons.apply' in self.request.form:
             # Ordering
@@ -48,7 +48,7 @@ class Slider(BrowserView):
                 if arg.startswith('form.active.'):
                     i = int(arg.split('.').pop())
                     images[i]['image_path'] = self.request.form.get(arg)
-                    images[i]['restriction_path'] = context_path
+                    images[i]['restriction_path'] = get_restricted_path(self.context, self.request)
             images = filter(lambda x: x, images)
             images = filter(lambda x: 'restriction_path' in x, images)
             
@@ -72,7 +72,7 @@ class Slider(BrowserView):
                 i = len(images)-1
                 images[i]['index'] = str(i)
                 images[i]['image_path'] = img_obj.absolute_url_path()
-                images[i]['restriction_path'] = context_path
+                images[i]['restriction_path'] = get_restricted_path(self.context, self.request)
                 
             self.save_content(images)
             
@@ -84,9 +84,9 @@ class Slider(BrowserView):
 
         
     def save_content(self, incoming_image_data):
-        context_path = self.context.absolute_url_path().replace('/' + self.default_page, '')
+        #context_path = self.context.absolute_url_path().replace('/' + self.default_page, '')
         all_image_data = parse_images(self.portlet.data)
-        keep_image_data = filter(lambda x: x['restriction_path'] != context_path, all_image_data)
+        keep_image_data = filter(lambda x: x['restriction_path'] != get_restricted_path(self.context, self.request), all_image_data)
         self.portlet.data.show_images = unparse_images(keep_image_data + incoming_image_data)
         
     @property

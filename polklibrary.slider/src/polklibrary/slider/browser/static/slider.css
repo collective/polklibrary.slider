@@ -259,7 +259,3 @@ div.pl-slide-edit > span:hover {
     margin: 0 5px;
     vertical-align: middle;
 }
-
-.portletSlider #form #formfield-form-widgets-show_images {
-    display: none;
-}
