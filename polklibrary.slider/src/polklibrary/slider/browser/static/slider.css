@@ -39,7 +39,9 @@ div.pl-slider-container > img {
     width: 100%;
     z-index: 0;
 }
-
+div.pl-slider-container > img[data-href] {
+    cursor: pointer;
+}
 
 div.pl-slider-container .pl-slide-text {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+75,000000+100&0.65+0,0.48+75,0+100 */
