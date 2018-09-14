@@ -19,6 +19,7 @@
       directory="profiles/default"
       description="Installs the polklibrary.slider add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
       zcml:condition="have plone-5"
       />
       
@@ -28,14 +29,17 @@
       directory="profiles/plone4"
       description="Installs the polklibrary.slider add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      post_handler=".setuphandlers.post_install"
       zcml:condition="not-have plone-5"
       />
       
+      <!--
   <genericsetup:importStep
       name="polklibrary.slider-postInstall"
       title="polklibrary.slider post_install import step"
       description="Post install import step from polklibrary.slider"
       handler=".setuphandlers.post_install">
   </genericsetup:importStep>
+  -->
 
 </configure>

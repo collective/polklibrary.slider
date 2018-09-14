@@ -40,27 +40,35 @@ def parse_images(data):
         
 
 def get_restricted_images(portal, context, data):
-    slider_images = api.content.get(path='/' + portal.id + '/' + data.folder_id)
-    default_page = '$missing$'
-    if context.getDefaultPage():
-        default_page = context.getDefaultPage()
-    path = context.absolute_url_path()
-    if default_page:
-        path = context.absolute_url_path().replace('/' + default_page, '')
-
-    path_restriction = ''
-    images = sorted(parse_images(data), key=itemgetter('restriction_path'), reverse=True)
-    for image in images:
-        if path.startswith(image['restriction_path']): 
-            path_restriction = image['restriction_path']
-            break
-            
-    image_paths = filter(lambda x: x['restriction_path'] == path_restriction, images)
 
     restricted_images = []
-    for image_path in sorted(image_paths, key=itemgetter('index')):
-        restricted_images = restricted_images + [ i for i in api.content.find(context=slider_images, portal_type='linkable_image', path={'query':image_path['image_path']})]
-    
+    try:
+        slider_images = None
+        slider_images_brains = api.content.find(context=portal, portal_type='Folder', id=data.folder_id)
+        if slider_images_brains:
+            slider_images = slider_images_brains[0]
+        
+        default_page = '$missing$'
+        if context.getDefaultPage():
+            default_page = context.getDefaultPage()
+        path = context.absolute_url_path()
+        if default_page:
+            path = context.absolute_url_path().replace('/' + default_page, '')
+
+        path_restriction = ''
+        images = sorted(parse_images(data), key=itemgetter('restriction_path'), reverse=True)
+        for image in images:
+            if path.startswith(image['restriction_path']): 
+                path_restriction = image['restriction_path']
+                break
+                
+        image_paths = filter(lambda x: x['restriction_path'] == path_restriction, images)
+
+        for image_path in sorted(image_paths, key=itemgetter('index')):
+            restricted_images = restricted_images + [ i for i in api.content.find(context=slider_images, portal_type='linkable_image', path={'query':image_path['image_path']})]
+    except Exception as e:
+        print "ERROR: " + str(e)
+        
     return restricted_images
     
     
