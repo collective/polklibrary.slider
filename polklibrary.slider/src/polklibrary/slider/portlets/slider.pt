@@ -37,7 +37,25 @@
         </div>
         
         <script type="text/javascript">
-            PolkSliderLoad();
+            if (window.PolkSliderReady != true)
+            {
+                window.PolkSliderReady = true;
+                
+                var css = document.createElement('link');
+                css.rel = 'stylesheet';
+                css.href = '${view/portal/absolute_url}' + "/++resource++polklibraryslider/slider.css";
+                document.getElementsByTagName('head')[0].appendChild(css);
+                
+                var script = document.createElement('script');
+                script.onload = function(){
+                    PolkSliderLoad();
+                };
+                script.async = false;
+                script.src = '${view/portal/absolute_url}' + "/++resource++polklibraryslider/slider.js";
+                script.type = 'text/javascript';
+                document.getElementsByTagName('head')[0].appendChild(script);
+
+            }
         </script>
         
     </section>

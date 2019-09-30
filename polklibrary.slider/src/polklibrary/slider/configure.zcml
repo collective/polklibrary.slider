@@ -12,27 +12,28 @@
 
   <include package=".browser" />
   <include package=".portlets" />
-
+  
   <genericsetup:registerProfile
       name="default"
       title="polklibrary.slider"
       directory="profiles/default"
       description="Installs the polklibrary.slider add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
       zcml:condition="have plone-5"
       />
       
+<!--
   <genericsetup:registerProfile
       name="default"
       title="polklibrary.slider"
       directory="profiles/plone4"
       description="Installs the polklibrary.slider add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
       zcml:condition="not-have plone-5"
       />
-      
+-->
+
+
       <!--
   <genericsetup:importStep
       name="polklibrary.slider-postInstall"
