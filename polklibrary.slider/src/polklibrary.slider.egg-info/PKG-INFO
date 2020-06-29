@@ -1,4 +1,4 @@
-Metadata-Version: 1.1
+Metadata-Version: 2.1
 Name: polklibrary.slider
 Version: 0.0.1
 Summary: Slider for portlets
@@ -88,7 +88,7 @@ Description: .. This README is meant for consumption by humans and pypi. Pypi ca
         =========
         
         
-        0.0.1 (unreleased)
+        0.0.1 (2020-06-28)
         ------------------
         
         - Initial release.
@@ -104,3 +104,4 @@ Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 2.7
 Classifier: Operating System :: OS Independent
 Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
+Provides-Extra: test
