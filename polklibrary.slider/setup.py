@@ -19,7 +19,7 @@ long_description = (
 
 setup(
     name='polklibrary.slider',
-    version='0.0.2',
+    version='0.0.3.dev0',
     description="Slider for portlets",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
